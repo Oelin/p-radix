@@ -1,0 +1,24 @@
+{
+  "name": "portxch",
+  "version": "1.0.0",
+  "description": "A way to communicate using port numbers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oelin/portxch.git"
+  },
+  "keywords": [
+    "port",
+    "socket",
+    "xss"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oelin/portxch/issues"
+  },
+  "homepage": "https://github.com/Oelin/portxch#readme"
+}
