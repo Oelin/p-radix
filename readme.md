@@ -2,6 +2,24 @@
 
 A weird library that uses port nubmers to transfer data. It's probably helpful for XSS exploit development.
 
+server-side
+
+```js
+const xch = require('portxch')(256) // use 256 ports (about 16 bytes per second)
+
+xch.on(message => {
+  console.log(`recieved ${message}`)
+})
+```
+
+client-side
+
+```
+const xch = require('portxch')(256) // the client and server must use the same number of ports
+
+xch.send('Hello world!', 'server.com')
+```
+
 
 ## Explanation
 
