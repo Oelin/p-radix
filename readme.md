@@ -6,9 +6,9 @@ A strange library that uses port numbers to transfer data. It's only real use is
 Server
 
 ```js
-const xch = require('xch')()
+const listen = require('xch')()
 
-xch.on(data => {
+listen(data => {
   console.log(`recieved ${data}`)
 })
 ```
@@ -17,9 +17,10 @@ xch.on(data => {
 Client
 
 ```html
+<script src='/xch.js'>
 <script>
-  const xch = require('xch')()
+  const send = xch()
   
-  xch.send('Hello world!', 'server.com')
+  client.send('Hello world!', 'server.com')
 </script>
 ```
