@@ -1,13 +1,51 @@
 const net = require('net')
 
 
+function binary(n, size) {
+  return n.toString(2).padStart(size, '0')
+}
+
+
+
 function xch(base=256, port=5000) {
 
   let message = ''
   let byte = ''
-  let block = Math.ceil(Math.log(base) / Math.log(2))
+  let space = Math.ceil(Math.log2(base))
+  
+  
+  function check(cb) {
+    if (byte.length % 8) return
+    
+    byte = parseInt(byte, 2)
+    
+    if (! byte) return cb(message)
+    message += String.fromCharCode(byte)
+  }
 
+  
+  function add(n, cb) {
+    binary(n, space).forEach(bit => {
+      byte += bit
+      check(cb)
+    })
+  }
 
+  
+  function on(cb) {
+    let n = 0
+    
+    while (n < base) {
+      net.createServer(socket => {
+        socket.end()
+        add(n, cb)
+      })
+      .listen(base + n++)
+    }
+  }
+}
+
+/*
   this.on = function(cb) {
     for (let i=0; i < base; i++) {
 
@@ -40,7 +78,7 @@ function xch(base=256, port=5000) {
 
 module.exports = (...a) => new xch(...a)
 
-
+*/
 
 //
 // const xch = require('portxch')
