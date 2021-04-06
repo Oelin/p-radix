@@ -6,19 +6,21 @@ A weird library that uses port numbers to transfer data. It's probably helpful f
 server-side
 
 ```js
-const xch = require('xch')() //
+const server = require('xch')()
 
-xch.when(data => {
+server.when(data => {
   console.log(`recieved ${data}`)
 })
 ```
 
 client-side
 
-```js
-const xch = require('xch')
-
-xch.send('Hello world!', 'server.com')
+```html
+<script src='/xch/client.js'></script>
+<script>
+  client = xch()
+  client.send('Hello world!', 'server.com')
+</script>
 ```
 
 
