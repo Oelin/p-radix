@@ -1,6 +1,6 @@
 # xch
 
-A weird library that uses port numbers to transfer data. It's only use is probably in XSS exploit writing.
+A strange library that uses port numbers to transfer data. It's only real use is in XSS exploit writing.
 
 
 Server
