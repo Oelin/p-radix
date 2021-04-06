@@ -6,17 +6,17 @@ A weird library that uses port numbers to transfer data. It's probably helpful f
 server-side
 
 ```js
-const xch = require('portxch')(256) // use 256 ports (about 16 bytes per second)
+const xch = require('xch')() //
 
-xch.on(message => {
-  console.log(`recieved ${message}`)
+xch.when(data => {
+  console.log(`recieved ${data}`)
 })
 ```
 
 client-side
 
 ```js
-const xch = require('portxch')(256) // the client and server must use the same number of ports
+const xch = require('xch')
 
 xch.send('Hello world!', 'server.com')
 ```
