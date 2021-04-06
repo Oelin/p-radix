@@ -3,23 +3,24 @@
 A weird library that uses port numbers to transfer data. It's probably helpful for XSS exploit development.
 
 
-server-side
+Server (on server.com)
 
 ```js
-const xch = require('xch')
-const server = xch()
+const server = require('xch')()
 
 server.when(data => {
   console.log(`recieved ${data}`)
 })
 ```
 
-client-side
+Client
 
 ```html
 <script src='/xch/client.js'>
-  fonst client = xch()
+  
+  const client = xch()
   client.send('Hello world!', 'server.com')
+  
 </script>
 ```
 
