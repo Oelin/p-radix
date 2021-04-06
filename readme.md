@@ -1,6 +1,6 @@
 # portxch
 
-A weird library that uses port nubmers to transfer data. It's probably helpful for XSS exploit development.
+A weird library that uses port numbers to transfer data. It's probably helpful for XSS exploit development.
 
 
 server-side
