@@ -16,8 +16,7 @@ server.when(data => {
 client-side
 
 ```html
-<script src='/xch/client.js'></script>
-<script>
+<script src='/xch/client.js'>
   client = xch()
   client.send('Hello world!', 'server.com')
 </script>
