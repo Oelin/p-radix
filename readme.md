@@ -1,4 +1,4 @@
-# xchp
+# portxch
 
 A strange library that uses port numbers to transfer data. It's only real use is in XSS exploit writing.
 
@@ -6,9 +6,9 @@ A strange library that uses port numbers to transfer data. It's only real use is
 Server
 
 ```js
-const xchp = require('xchp')()
+const xch = require('xch')()
 
-xchp.when(data => {
+xch.when(data => {
   console.log(`recieved ${data}`)
 })
 ```
@@ -17,10 +17,10 @@ xchp.when(data => {
 Client
 
 ```html
-<script src='/xchp.js'>
+<script src='/xch.js'>
   
-  xchp = xchp()
-  xchp.send('Hello world!', 'server.com')
+  xch = xch()
+  xch.send('Hello world!', 'server.com')
   
 </script>
 ```
