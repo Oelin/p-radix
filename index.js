@@ -1,103 +1,87 @@
-const net = require('net')
+let net = require('net')
+let binary = require('./binary')
+let port, base
+let space
+let user
+let string = ''
+let byte = ''
 
 
-function binary(n, size) {
-  return n.toString(2).padStart(size, '0')
-}
+// handle connections for a particular port
 
+function peer(n) {
 
-
-function xch(base=256, port=5000) {
-
-  let message = ''
-  let byte = ''
-  let space = Math.ceil(Math.log2(base))
-  
-  
-  function check(cb) {
-    if (byte.length % 8) return
-    
-    byte = parseInt(byte, 2)
-    
-    if (! byte) return cb(message)
-    message += String.fromCharCode(byte)
-  }
-
-  
-  function add(n, cb) {
-    binary(n, space).forEach(bit => {
-      byte += bit
-      check(cb)
-    })
-  }
-
-  
-  function on(cb) {
-    let n = 0
-    
-    while (n < base) {
-      net.createServer(socket => {
-        socket.end()
-        add(n, cb)
-      })
-      .listen(base + n++)
-    }
-  }
-}
-
-/*
-  this.on = function(cb) {
-    for (let i=0; i < base; i++) {
-
-      let char
-      let bits = i.toString(2).padStart(block, '0').split('')
-
-      net.createServer(socket => {
-        socket.end()
-
-        bits.forEach(bit => {
-          byte += bit
-
-          if (byte.length % 8 == 0) {
-            char = String.fromCharCode(parseInt(byte, 2))
-            byte = ''
-
-            if (char == '\0') {
-              cb(message)
-              message = ''
-            } else {
-              message += char
-            }
-          }
-        })
-      }).listen(port + i)
-    }
+  return socket => {
+    socket.end()
+    binary(n, space).forEach(add)
   }
 }
 
 
-module.exports = (...a) => new xch(...a)
+function add(bit) {
+  byte += bit
 
-*/
+  // if we're at the end of a byte, update `byte` and `string`
 
-//
-// const xch = require('portxch')
-//
-//
-// xch.on(message => {
-//   console.log(message)
-// })
+  if (lsb()) update()
+}
 
 
-// const xch = require('portxch')(255)
-//
-// xch.send('hello', 'test.com')
-//
-//
-// xch.on(data => {
-//
-// })
-//
-//
-//
-// xch.send('hello world', 'test.com', [8000, 8255])
+function lsb() {
+  return !(byte.length % 8)
+}
+
+
+// convert the current byte into a character
+
+function letter() {
+  return String.fromCharCode(parseInt(byte, 2))
+}
+
+
+
+// add the current character to `string` and flush byte
+
+function flush() {
+  string += letter()
+  byte = ''
+}
+
+
+// return `string` to user and then flush it
+
+function finish() {
+  user(string)
+  string = ''
+}
+
+
+// finish or flush depending on whether we recieve a null byte
+
+function update() {
+  return +byte ? flush() : finish()
+}
+
+
+
+// create peers for each port
+
+function when(func) {
+  let n = 0
+  user = func
+
+  while (n < base) {
+    net.createServer(peer(n)).listen(port + n++)
+  }
+}
+
+
+
+
+module.exports = function(p=5000, b=256) {
+  space = Math.ceil(Math.log2(b))
+  port = p
+  base = b
+
+  return { when }
+}
