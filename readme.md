@@ -19,9 +19,7 @@ Client
 ```html
 <script src='/portxch.js'>
   
-  let client = xch()
-  
-  client.send('Hello world!', 'server.com')
+  xch().send('Hello world!', 'server.com')
   
 </script>
 ```
