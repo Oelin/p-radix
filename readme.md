@@ -20,6 +20,7 @@ Client
 <script src='/xch.js'>
   
   let socket = xch()
+  
   socket.send('Hello world!', 'server.com')
   
 </script>
