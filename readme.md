@@ -8,7 +8,7 @@ Server
 ```js
 const xch = require('xch')()
 
-xch.when(data => {
+xch.on(data => {
   console.log(`recieved ${data}`)
 })
 ```
@@ -18,9 +18,8 @@ Client
 
 ```html
 <script>
-  
   const xch = require('xch')()
+  
   xch.send('Hello world!', 'server.com')
-
 </script>
 ```
