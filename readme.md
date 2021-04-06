@@ -1,4 +1,4 @@
-# portxch
+# xch
 
 A weird library that uses port numbers to transfer data. It's probably helpful for XSS exploit development.
 
