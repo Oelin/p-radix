@@ -18,8 +18,9 @@ Client
 
 ```html
 <script src='/xch.js'>
-  xch = xch()
   
+  xch = xch()
   xch.send('Hello world!', 'server.com')
+  
 </script>
 ```
