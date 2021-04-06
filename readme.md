@@ -6,7 +6,8 @@ A weird library that uses port numbers to transfer data. It's probably helpful f
 server-side
 
 ```js
-const server = require('xch')()
+const xch = require('xch')
+const server = xch()
 
 server.when(data => {
   console.log(`recieved ${data}`)
@@ -17,7 +18,7 @@ client-side
 
 ```html
 <script src='/xch/client.js'>
-  client = xch()
+  fonst client = xch()
   client.send('Hello world!', 'server.com')
 </script>
 ```
