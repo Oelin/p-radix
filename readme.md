@@ -19,7 +19,8 @@ Client
 ```html
 <script src='/portxch.js'>
   
-  xch().send('Hello world!', 'server.com')
+  xch = xch()
+  xch.send('Hello world!', 'server.com')
   
 </script>
 ```
